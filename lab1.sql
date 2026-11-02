@@ -1,5 +1,5 @@
 CREATE TABLE products (
-    product_code INTEGER PRIMARY KEY,
+    product_code INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name VARCHAR(256) NOT NULL,
     pieces_per_package INTEGER,
     color VARCHAR(50),
@@ -17,6 +17,7 @@ CREATE TABLE order_contents (
     CONSTRAINT fk_order_contents_product
         FOREIGN KEY (product_code)
         REFERENCES products(product_code)
-        ON DELETE CASCADE,
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
     PRIMARY KEY (order_number, product_code)
 );
